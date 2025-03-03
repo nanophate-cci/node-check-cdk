@@ -1,0 +1,24 @@
+version: 2.1
+
+jobs:
+  parameters:
+    version:
+      type: string
+  build:
+    docker:
+    - image: cimg/node:<< parameters.version >>
+    steps:
+    - checkout
+    - run:
+        command: yarn --version
+        name: yarn version
+    - run: npm install -g aws-cdk
+    - run: cdk --version
+
+workflows:
+  cdk-jobs:
+    jobs:
+      - build:
+          matrix:
+            parameters:
+              version: ["18.20", "18.13"]
