@@ -1,10 +1,10 @@
 version: 2.1
 
 jobs:
-  parameters:
-    version:
-      type: string
   build:
+    parameters:
+      version:
+        type: string
     docker:
     - image: cimg/node:<< parameters.version >>
     steps:
